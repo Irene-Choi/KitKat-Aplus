@@ -190,7 +190,7 @@ const callMaze = (level, withanimation = false) => {
   myMaze.initGrid();
 }
 
-callMaze('easy', true);
+//callMaze('easy', true);
 // callMaze('medium', true);
 // callMaze('hard', true);
 // callMaze('extreme', true);
