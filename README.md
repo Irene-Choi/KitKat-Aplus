@@ -1,12 +1,11 @@
 # KitKat-Aplus
 ## This project is generating a random Maze and find the way to treasure box !!
-### Team Pgoject at SFD by Generation Australia
-### member : Irene Choi, Soumya
-
+Team Project at SFD by Generation Australia : (Irene Choi, Soumya)
 
 ## Taking Individual Part
 
-- Irene : Generate random Maze
+- Irene : 
+  - Generate random Maze
 
 - Soumya : 
   - Build index.html - include CSS 
@@ -23,9 +22,10 @@
   - Soumya :
       Count, Control Keys, Control HTML
 
+
 ## Timeline
 - Thu (1hr) - Plan, Github creation, Discuss Basic
 - Fri (3hr) - start : HTML - click start button, call display maze function. (with animation option)
-            end : movement count - monday 
+            - end : movement count - monday 
 - Tue (2hr) - slide
 - Wed - Presentation 
