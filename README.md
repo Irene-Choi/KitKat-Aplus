@@ -23,8 +23,8 @@
 - Github (to collaborate)
 
 ## Timeline
-Thu (1hr) - Plan, Github creation, Discuss Basic
-Fri (3hr) - start : HTML - click start button, call display maze function. (with animation option)
+- Thu (1hr) - Plan, Github creation, Discuss Basic
+- Fri (3hr) - start : HTML - click start button, call display maze function. (with animation option)
             end : movement count - monday 
-Tue (2hr) - slide
-Wed - Presentation 
+- Tue (2hr) - slide
+- Wed - Presentation 
