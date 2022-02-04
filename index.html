@@ -2,18 +2,28 @@
   <head>
     <link rel="stylesheet" href="./css/styles.css" />
     <title>KitKat Aplus Maze</title>
-    <script src="maze.js"></script>
   </head>
+
   <body>
-    <button type="button" onclick="callMaze('easy', false);">Click Me!</button>
-    
+    <form>
+      <input type="radio" id="easy" name="level" value="easy">
+      <label for="easy">Easy</label><br>
+      <input type="radio" id="medium" name="level" value="medium">
+      <label for="medium">Medium</label><br>
+      <button type="button" onclick="call();">Click Me!</button>
+    </form>
+    <script>
+      function call(level)
+      {
+        // const difficulty = document.querySelector();
+        const difficulty = 'easy';
+        callMaze(difficulty, false);
+      }
+    </script>
+
     <canvas class="maze"></canvas>
 
-   <!--<script src="maze.js"></script>-->
+  <script src="maze.js"></script>
   <!-- <script src="mazegame.js"></script> -->
-  <script>
-    //callMaze('easy', false);
-  </script>
-
   </body>
 </html>
