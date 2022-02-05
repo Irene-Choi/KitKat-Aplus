@@ -1,3 +1,5 @@
+import { Maze } from "./maze.js";
+
 let color = {
   'background' : 'white',
   'wall' : 'black',
@@ -5,35 +7,19 @@ let color = {
   'highlight' : 'yellow',
 };
 
-class Maze_Backtracker {
+class Maze_Backtracker extends Maze {
   constructor(canvas, size, cellsinaLine) {
-    this.ctx = canvas.getContext('2d');
-    this.ctx.fillStyle = color.background;
-    canvas.width = size;
-    canvas.height = size;
+    super(canvas, size, cellsinaLine);
     canvas.style.background = color.wall;
-    
-    this.size = size;
-    this.columns = cellsinaLine;
-    this.rows = cellsinaLine;
-
-    this.cellSize = canvas.width / this.columns;
-    this.border = this.cellSize / 2;
-    // this.border = 2;
-
-    this.grid = [];
     this.stack = [];
-    this.currentCell;
-    this.goal;
-    this.isComplete = false;
   }
 
   // Set the grid: Create new this.grid array based on number of instance rows and columns
   init = () => {
-    for (let r = 0; r < this.rows; r++) {
+    for (let y = 0; y < this.rows; y++) {
       let row = [];
-      for (let c = 0; c < this.columns; c++) {
-        let cell = new Cell(c, r);
+      for (let x = 0; x < this.columns; x++) {
+        let cell = new Cell(x, y);
         row.push(cell);
       }
       this.grid.push(row);
@@ -41,40 +27,8 @@ class Maze_Backtracker {
     // Set the starting and goal grid
     this.currentCell = this.grid[0][0];
     this.goal = this.grid[this.rows - 1][this.columns - 1];
-
-    console.log(this.grid);
+    // console.log(this.grid);
   }
-
-  // Recursive call
-  // generateMaze(withAnimation = false) {
-  //   if (!this.algorithm()) {
-  //     this.drawImage(this.goal, 'treasure');
-  //     // this.drawMaze();
-  //     return;
-  //   }
-  //   if (withAnimation)
-  //   {
-  //     // this.drawMaze();
-  //     window.requestAnimationFrame(() => this.generateMaze(withAnimation)); 
-  //     // requestAnimationFrame(this.generateMaze(withAnimation));
-  //   }
-  //   else 
-  //     this.generateMaze(withAnimation);
-  // }
-
-  // Draw the canvas by setting the size and placing the cells in the grid array on the canvas.
-  // drawMaze() {
-  //   // Set the first cell as visited
-  //   this.currentCell.visited = true;
-  //   // Loop through the 2d grid array and call the show method for each cell instance
-  //   for (let r = 0; r < this.rows; r++) {
-  //     for (let c = 0; c < this.columns; c++) {
-  //       let grid = this.grid;
-  //       grid[r][c].drawCell();
-  //     }
-  //   }
-  //   // this.currentCell.highlight();
-  // }
 
   algorithm = (withAnimation = false) => {
     // This function will assign the variable 'nextCell' to random cell out of the current cells available neighbouting cells
@@ -138,54 +92,9 @@ class Maze_Backtracker {
 
   moveNext = (cell, dir) => {
     this.currentCell.walls[dir] = false;
-    cell.walls[getOpposite(dir)] = false;
+    cell.walls[this.getOpposite(dir)] = false;
 
     this.currentCell = cell;
-  }
-
-  drawWay = (wall) => {
-    // console.log(wall);
-    const DX = { 'right' : 0, 'left' : -1, 'top' : 0, 'bottom' : 0 };
-    const DY = { 'right' : 0, 'left' : 0, 'top' : -1, 'bottom' : 0 };
-
-    this.ctx.fillStyle = color.background;
-    const long = this.cellSize * 2 - this.border;
-    const short = this.cellSize - this.border;
-    let width, height;
-    const [x,y,dir] = wall;
-
-    if (dir === 'top' || dir === 'bottom') {
-      width = short;
-      height = long;
-    }
-    else {
-      width = long;
-      height = short;
-    }
-    // console.log(this.getPoint(x + DX[dir]), this.getPoint(y+ DY[dir]), width, height);
-    this.ctx.fillRect(this.getPoint(x + DX[dir]), this.getPoint(y+ DY[dir]), width, height);
-  }
-
-  drawCell = (cell) => {
-    let size = this.cellSize - this.border;
-    this.ctx.fillStyle = color.background;
-    this.ctx.fillRect(this.getPoint(cell.x), this.getPoint(cell.y), size, size);
-  }
-
-  drawImage = (cell, name = 'boy') => {
-    let img = new Image();
-    if (name === 'boy') img.src = './image/sprite.png';
-    else if (name === 'treasure') img.src = './image/finishSprite.png';
-    // let margin = Math.floor(this.cellSize / 10);
-    let margin = 1;
-    let x = this.getPoint(cell.x) + margin;
-    let y = this.getPoint(cell.y) + margin;
-    let size = this.cellSize - this.border - 1;
-    img.onload = () => this.ctx.drawImage(img, x, y, size, size);
-  }
-
-  getPoint = (p) => {
-    return p * this.cellSize + this.border / 2;
   }
 };
 
@@ -196,11 +105,6 @@ class Cell {
     this.visited = false;
     this.walls = { top: true, right: true, bottom: true, left: true };
   }
-};
-
-const getOpposite = (dir) => {
-  const OPPOSITE = { 'right' : 'left', 'left' : 'right', 'top' : 'bottom', 'bottom' : 'top' };
-  return OPPOSITE[dir];
 };
 
 export { Maze_Backtracker };

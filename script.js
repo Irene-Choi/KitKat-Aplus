@@ -1,4 +1,4 @@
-import { callMaze } from "./maze.js";
+import { callMaze } from "./call_maze.js";
 import { move } from "./mazegame.js";
 
 let complete = document.querySelector(".complete");
@@ -16,5 +16,5 @@ function call(level = 'easy')
   const maze = document.getElementById('maze');
   // const difficulty = document.querySelector();
   const difficulty = 'easy';
-  callMaze(maze, difficulty, false);
+  callMaze(maze, difficulty, true);
 }

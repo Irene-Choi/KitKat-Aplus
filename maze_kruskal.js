@@ -1,85 +1,86 @@
-class Maze_Kruskal {
-  constructor (canvas, size, cellsinaLine) {
-    this.ctx = canvas.getContext('2d');
-    canvas.width = size;
-    canvas.height = size;
-    canvas.style.background = 'black';
-    this.height = cellsinaLine;
-    this.width = cellsinaLine;
-    this.cellSize = canvas.width / this.width;
-    this.border = this.cellSize / 2;
-    // this.border = 2;
+import { Maze } from "./maze.js";
 
-    this.grid = [];
+let color = {
+  'background' : 'white',
+  'wall' : 'black',
+  'goal' : "rgb(83, 247, 43)",
+  'highlight' : 'yellow',
+};
+
+class Maze_Kruskal extends Maze {
+  constructor (canvas, size, cellsinaLine) {
+    super(canvas, size, cellsinaLine);
+    canvas.style.background = color.wall;
     this.walls = [];
   }
 
   init = () => {
-    for(let r = 0; r < this.height; r++) {
+    for(let y = 0; y < this.height; y++) {
       let row = [];
-      for(let c = 0; c < this.width; c++) {
-        if (r > 0) this.walls.push([c,r,'N']);
-        if (c > 0) this.walls.push([c,r,'W']);
+      for(let x = 0; x < this.width; x++) {
+        if (y > 0) this.walls.push([x,y,'top']);
+        if (x > 0) this.walls.push([x,y,'left']);
     
-        let cell = new Cell_Kruskal(r,c);
+        let cell = new Cell_Kruskal(x, y);
         row.push(cell);
       }  
       this.grid.push(row);
     }
     // make random wall array
     this.walls = shuffle(this.walls);
+
+    // Set the starting and goal grid
+    this.currentCell = this.grid[0][0];
+    this.goal = this.grid[this.rows - 1][this.columns - 1];
   }
 
-  algorithm = () => {
+  algorithm = (withAnimation) => {
     // while (this.walls.length > 0) {
       const wall = this.walls.pop();
       const [cell1, cell2] = this.getTwoCells(wall);
       
       if (! cell1.isConnected(cell2)) {
-        this.connect(cell1, cell2);
+        this.connect(wall);
         this.drawWay(wall);
       } 
 
     // if (this.walls.length === 0) clearInterval(stopInterval);
-    if (this.walls.length > 0 && cell1.set.length < this.width * this.height) requestAnimationFrame(this.algorithm);
+    if (this.walls.length > 0 && cell1.set.length < this.width * this.height) {
+        // recursive call
+      if (withAnimation)
+        requestAnimationFrame(this.algorithm);
+      else 
+        this.algorithm(withAnimation);
+    } else {
+      this.isComplete = true;
+      this.drawImage(this.currentCell, 'boy');
+      this.drawImage(this.goal, 'treasure');
+    }
   }
 
-  connect = (cell1, cell2) => {
+  connect = (wall) => {
+    const [cell1, cell2] = this.getTwoCells(wall);
+    const dir = wall[2];
     // merge two arrays
     let mergeArr = Array.from(new Set([...cell1.set, ...cell2.set]));
     // console.log('mergeArr', mergeArr);
     // update all included set
     mergeArr.forEach( (cell) => {
       let [x, y] = cell.split('.');
-      this.grid[x][y].set = mergeArr;
+      this.grid[y][x].set = mergeArr;
     });
-  }
 
-  drawWay = (wall) => {
-    this.ctx.fillStyle = "white";
-    const long = this.cellSize * 2 - this.border;
-    const short = this.cellSize - this.border;
-    const [x,y,dir] = wall;
-
-    if (dir === 'N') {
-      let startX = (x) * this.cellSize + this.border / 2;
-      let startY = (y-1) * this.cellSize + this.border / 2;
-      this.ctx.fillRect(startX, startY, short, long);
-    }
-    else {
-      let startX = (x-1) * this.cellSize + this.border / 2;
-      let startY = (y) * this.cellSize + this.border / 2;
-      this.ctx.fillRect(startX, startY, long, short);
-    }
+    cell1.walls[dir] = false;
+    cell2.walls[this.getOpposite(dir)] = false;
   }
 
   getTwoCells = (wall) => {
-    const DX = { W : -1, N : 0 };
-    const DY = { N : -1, W : 0 };
+    const DX = { 'left' : -1, 'top' : 0 };
+    const DY = { 'top' : -1, 'left' : 0 };
     const [x,y,dir] = wall;
 
-    let cell1 = this.grid[x][y];
-    let cell2 = this.grid[x + DX[dir]][y + DY[dir]];
+    let cell1 = this.grid[y][x];
+    let cell2 = this.grid[y + DY[dir]][x + DX[dir]];
     return [cell1, cell2];
   }
 
@@ -89,8 +90,8 @@ class Cell_Kruskal {
   constructor (x,y) {
     this.x = x;
     this.y = y;
-    // this.root = `${x}.${y}`;
     this.set = [`${x}.${y}`];
+    this.walls = { top: true, right: true, bottom: true, left: true };
   }
 
   isConnected = (cell) => {
@@ -108,9 +109,3 @@ function shuffle(array) {
 }
 
 export { Maze_Kruskal };
-
-// const canvas = document.getElementById('maze');
-// let maze = new Maze_Kruskal(canvas, 500, 10);
-// maze.init();
-// maze.algorithm();
-// let stopInterval = setInterval(maze.algorithm, 500);

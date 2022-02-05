@@ -1,4 +1,4 @@
-import { myMaze as newMaze } from "./maze.js";
+import { myMaze as newMaze } from "./call_maze.js";
 
 let complete = document.querySelector(".complete");
 
