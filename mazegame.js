@@ -1,49 +1,30 @@
-// let complete = document.querySelector(".complete");
-// let replay = document.querySelector(".replay");
-// let close = document.querySelector(".close");
+import { myMaze as newMaze } from "./maze.js";
 
-document.addEventListener("keydown", move);
-// replay.addEventListener("click", () => location.reload() );
-// close.addEventListener("click", () => complete.style.display = "none");
+let complete = document.querySelector(".complete");
 
 function move(e) {
-  if (!generationComplete) return;
-  let key = e.key;
-  let row = currentCell.iRow;
-  let col = currentCell.iCol;
-  let nextCell = false;
-
-  switch (key) {
-    case "ArrowUp":
-      if (!currentCell.walls.top) {
-        nextCell = newMaze.grid[row - 1][col];
-      }
-      break;
-
-    case "ArrowRight":
-      if (!currentCell.walls.right) {
-        nextCell = newMaze.grid[row][col + 1];
-      }
-      break;
-
-    case "ArrowDown":
-      if (!currentCell.walls.bottom) {
-        nextCell = newMaze.grid[row + 1][col];
-      }
-      break;
-
-    case "ArrowLeft":
-      if (!currentCell.walls.left) {
-        nextCell = newMaze.grid[row][col - 1];
-      }
-      break;
-  }
-  if (nextCell) {
-    currentCell.drawCell();
-
-    currentCell = nextCell;
-    currentCell.drawImage('boy');
-    if (currentCell.goal) complete.style.display = "block";
-  }
-
+  move_Maze_Backtracker(e);
 }
+
+const move_Maze_Backtracker = (e) => {
+  if (!newMaze.isComplete) return;
+  let key = e.key;
+  let y = newMaze.currentCell.y;
+  let x = newMaze.currentCell.x;
+
+  const DX = { 'right' : 1, 'left' : -1, 'top' : 0, 'bottom' : 0 };
+  const DY = { 'right' : 0, 'left' : 0, 'top' : -1, 'bottom' : 1 };
+  const dir = { 'ArrowUp' : 'top', 'ArrowRight' : 'right', 'ArrowDown' : 'bottom', 'ArrowLeft' : 'left' };
+
+  if (! Object.keys(dir).includes(key)) return;
+
+  if (!newMaze.currentCell.walls[dir[key]]) {
+    let nextCell = newMaze.grid[y + DY[dir[key]]][x + DX[dir[key]]];
+    newMaze.drawCell(newMaze.currentCell);
+    newMaze.currentCell = nextCell;
+    newMaze.drawImage(newMaze.currentCell, 'boy');
+    if (newMaze.currentCell === newMaze.goal) complete.style.display = "block";
+  }
+}
+
+export { move, move_Maze_Backtracker };

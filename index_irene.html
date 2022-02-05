@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+  <head>
+    <link rel="stylesheet" href="./css/styles_irene.css" />
+    <title>KitKat Aplus Maze</title>
+  </head>
+
+  <body>
+    <form>
+      <input type="radio" id="easy" name="level" value="easy">
+      <label for="easy">Easy</label><br>
+      <input type="radio" id="medium" name="level" value="medium">
+      <label for="medium">Medium</label><br>
+      <button class='run' type="button">Click Me!</button>
+    </form>
+
+    <div class="complete">
+      <h3>Maze Completed</h3>
+      <button class="replay" id="submit">Play again</button>
+      <button class="close" id="submit">Close</button>
+    </div>
+    <canvas class="maze" id='maze'></canvas>
+
+    <script type="module" src='./script.js'></script>
+  </body>
+</html>
