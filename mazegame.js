@@ -3,10 +3,6 @@ import { myMaze as newMaze } from "./call_maze.js";
 let complete = document.querySelector(".complete");
 
 function move(e) {
-  move_Maze_Backtracker(e);
-}
-
-const move_Maze_Backtracker = (e) => {
   if (!newMaze.isComplete) return;
   let key = e.key;
   let y = newMaze.currentCell.y;
@@ -27,4 +23,4 @@ const move_Maze_Backtracker = (e) => {
   }
 }
 
-export { move, move_Maze_Backtracker };
+export { move };

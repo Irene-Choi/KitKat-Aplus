@@ -5,20 +5,44 @@
   </head>
 
   <body>
-    <form>
-      <input type="radio" id="easy" name="level" value="easy">
-      <label for="easy">Easy</label><br>
-      <input type="radio" id="medium" name="level" value="medium">
-      <label for="medium">Medium</label><br>
-      <button class='run' type="button">Click Me!</button>
-    </form>
-
-    <div class="complete">
-      <h3>Maze Completed</h3>
-      <button class="replay" id="submit">Play again</button>
-      <button class="close" id="submit">Close</button>
+    <div class="container top">
+      <form>
+        <div class="level">
+          <input type="radio" id="easy" name="level" value="easy" checked>
+          <label for="easy">Easy</label><br>
+          <input type="radio" id="medium" name="level" value="medium">
+          <label for="medium">Medium</label><br>
+          <input type="radio" id="hard" name="level" value="hard">
+          <label for="easy">Hard</label><br>
+          <input type="radio" id="extreme" name="level" value="extreme">
+          <label for="medium">Extreme</label><br>
+        </div>
+  
+        <div class="animation">
+          <input type="checkbox" class="animation" name="animation" checked>
+          <label for="animation">Animation</label><br>
+        </div>
+  
+        <div class="algorithm">
+          <input type="radio" id="backtracker" name="algorithm" value="backtracker" checked>
+          <label for="easy">Backtracker</label><br>
+          <input type="radio" id="kruskal" name="algorithm" value="kruskal">
+          <label for="medium">Kruskal</label><br>
+        </div>
+        <button class='run' type="button">Generate Maze</button>
+      </form>
     </div>
-    <canvas class="maze" id='maze'></canvas>
+    <div class="container">
+      <div class="complete">
+        <h3>Maze Completed</h3>
+        <button class="replay" id="submit">Play again</button>
+        <!-- <button class="close" id="submit">Close</button> -->
+      </div>
+    </div>
+
+    <div class="container maze">
+      <canvas class="maze" id='maze'></canvas>
+    </div>
 
     <script type="module" src='./script.js'></script>
   </body>

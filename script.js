@@ -1,20 +1,30 @@
 import { callMaze } from "./call_maze.js";
 import { move } from "./mazegame.js";
 
+const maze = document.getElementById('maze');
 let complete = document.querySelector(".complete");
 let replay = document.querySelector(".replay");
-let close = document.querySelector(".close");
+// let close = document.querySelector(".close");
 let run = document.querySelector(".run");
+let maze_container = document.querySelector(".maze");
 
-replay.addEventListener("click", () => location.reload() );
-close.addEventListener("click", () => complete.style.display = "none");
+// replay.addEventListener("click", () => location.reload() );
+replay.addEventListener("click", () => {
+  complete.style.display = "none";
+  maze_container.style.visibility = "hidden";
+});
 document.addEventListener("keydown", move);
-run.addEventListener("click", () => call() );
+run.addEventListener("click", call);
+// document.onload(() => complete.style.display = "none");
 
-function call(level = 'easy')
+function call()
 {
-  const maze = document.getElementById('maze');
-  // const difficulty = document.querySelector();
-  const difficulty = 'easy';
-  callMaze(maze, difficulty, true);
+  let level = document.querySelector('input[name="level"]:checked').value;
+  let animation = document.querySelector('input[name="animation"]').checked;
+  let algorithm = document.querySelector('input[name="algorithm"]:checked').value;
+  // maze_container.style.display = "initial";
+  maze_container.style.visibility = "visible";
+  console.log(level, animation, algorithm);
+
+  callMaze(maze, level, animation, algorithm);
 }
