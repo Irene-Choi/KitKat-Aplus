@@ -64,6 +64,11 @@ class Maze {
     img.onload = () => this.ctx.drawImage(img, x, y, size, size);
   }
 
+  setBorderStyle = (style) => {
+    if (style === 'thin') this.border = 2;
+    else this.border = this.cellSize / 2;
+  }
+
   getPoint = (p) => {
     return p * this.cellSize + this.border / 2;
   }

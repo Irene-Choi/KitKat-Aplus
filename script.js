@@ -22,9 +22,11 @@ function call()
   let level = document.querySelector('input[name="level"]:checked').value;
   let animation = document.querySelector('input[name="animation"]').checked;
   let algorithm = document.querySelector('input[name="algorithm"]:checked').value;
+  let borderstyle = document.querySelector('input[name="borderstyle"]:checked').value;
   // maze_container.style.display = "initial";
+  complete.style.display = "none";
   maze_container.style.visibility = "visible";
-  console.log(level, animation, algorithm);
+  console.log(level, animation, algorithm, borderstyle);
 
-  callMaze(maze, level, animation, algorithm);
+  callMaze(maze, level, animation, algorithm, borderstyle);
 }

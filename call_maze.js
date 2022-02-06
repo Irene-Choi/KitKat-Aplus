@@ -4,7 +4,7 @@ import { Maze_Kruskal } from "./maze_kruskal.js";
 // main maze class
 let myMaze = {};
 
-const callMaze = (maze, level = 'easy', withanimation = false, algorithm) => {
+const callMaze = (maze, level = 'easy', withanimation = false, algorithm, borderstyle) => {
   const difficulty = { 
           'easy' : { mazeSize: 500, cells: 10 },
           'medium' : { mazeSize: 500, cells: 20 },
@@ -17,6 +17,7 @@ const callMaze = (maze, level = 'easy', withanimation = false, algorithm) => {
     myMaze = new Maze_Kruskal(maze, difficulty[level].mazeSize, difficulty[level].cells);
 
   myMaze.init();
+  myMaze.setBorderStyle(borderstyle);
   myMaze.algorithm(withanimation);
 }
 

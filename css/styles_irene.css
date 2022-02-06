@@ -22,13 +22,12 @@
 .complete {
   /* display: flex;
   justify-items: center; */
-  display: none;
+  /* display: none;
   padding: var(--grid-gap);
-  /* position: absolute; */
   width : 1000px;
   text-align: center;
-  justify-items: center;
-  /* 
+  justify-items: center; */
+  display: none;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -38,10 +37,10 @@
   background: #72695e;
   color: aliceblue;
   z-index: 4;
-  
   text-align: center;
-  border-radius: 10px; */
+  border-radius: 10px;
 }
+
 html {
   font-weight: 800;
   font-family: Helvetica, Arial, sans-serif;
@@ -70,7 +69,7 @@ html {
   padding-bottom: 20px;
   display: grid;
   grid-gap: var(--grid-gap);
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
 }
 
 .maze {
@@ -80,7 +79,8 @@ html {
 form 
 .level,
 .animation,
-.algorithm
+.algorithm,
+.borderstyle
 {
   display: inline-block;
   border-radius: var(--border-radious);
@@ -95,4 +95,8 @@ button {
   border: 0;
   padding: 10px 20px;
   margin: 5px;
+}
+
+button:hover {
+  background: var(--bg-yellow);
 }
