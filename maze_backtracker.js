@@ -1,16 +1,8 @@
 import { Maze } from "./maze.js";
 
-let color = {
-  'background' : 'white',
-  'wall' : 'black',
-  'goal' : "rgb(83, 247, 43)",
-  'highlight' : 'yellow',
-};
-
 class Maze_Backtracker extends Maze {
   constructor(canvas, size, cellsinaLine) {
     super(canvas, size, cellsinaLine);
-    canvas.style.background = color.wall;
     this.stack = [];
   }
 

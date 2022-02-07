@@ -13,7 +13,7 @@
   --bg-secondary: #ffffee;
   --bg-yellow: #ffc600;
   --bg-third: #bb342f;
-  --bg-fourth: #8cbcb9;
+  --bg-fourth: #00000097;
   --br-fifth: #f5eaf5;
   --grid-gap: 20px;
   --border-radious: 5px;
@@ -25,7 +25,7 @@ body {
   /* font-size: 1rem; */
   font-weight: 600;
   line-height: 1.5;
-  color: #212529c7;
+  /* color: #212529c7; */
   background-color: #fff;
 }
 

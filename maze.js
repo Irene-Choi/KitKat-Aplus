@@ -1,15 +1,13 @@
-let color = {
-  'background' : 'white',
-  'wall' : 'black',
-  'goal' : "rgb(83, 247, 43)",
-  'highlight' : 'yellow',
-};
-
 class Maze {
   constructor(canvas, size, cellsinaLine) {
+    this.color = {
+      background : 'white',
+      wall : '#000000A0',
+    }
     this.ctx = canvas.getContext('2d');
     canvas.width = size;
     canvas.height = size;
+    canvas.style.background = this.color.wall;
 
     this.height = cellsinaLine;
     this.width = cellsinaLine;
@@ -28,7 +26,7 @@ class Maze {
   }
 
   drawWay = (wall) => {
-    this.ctx.fillStyle = color.background;
+    this.ctx.fillStyle = this.color.background;
     // console.log(wall);
     const DX = { 'right' : 0, 'left' : -1, 'top' : 0, 'bottom' : 0 };
     const DY = { 'right' : 0, 'left' : 0,  'top' : -1,'bottom' : 0 };
@@ -48,7 +46,7 @@ class Maze {
 
   drawCell = (cell) => {
     let size = this.cellSize - this.border;
-    this.ctx.fillStyle = color.background;
+    this.ctx.fillStyle = this.color.background;
     this.ctx.fillRect(this.getPoint(cell.x), this.getPoint(cell.y), size, size);
   }
 
