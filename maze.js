@@ -44,9 +44,9 @@ class Maze {
     this.ctx.fillRect(this.getPoint(x + DX[dir]), this.getPoint(y+ DY[dir]), width, height);
   }
 
-  drawCell = (cell) => {
+  drawCell = (cell, color = this.color.background) => {
     let size = this.cellSize - this.border;
-    this.ctx.fillStyle = this.color.background;
+    this.ctx.fillStyle = color;
     this.ctx.fillRect(this.getPoint(cell.x), this.getPoint(cell.y), size, size);
   }
 

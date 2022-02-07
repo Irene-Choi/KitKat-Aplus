@@ -33,7 +33,7 @@ export function move(e) {
 
   if (!thismaze.currentCell.walls[dir[key]]) {
     let nextCell = thismaze.grid[y + DY[dir[key]]][x + DX[dir[key]]];
-    thismaze.drawCell(thismaze.currentCell);
+    thismaze.drawCell(thismaze.currentCell, '#ffc600');
     thismaze.currentCell = nextCell;
     thismaze.drawImage(thismaze.currentCell, 'boy');
     countMove++;
