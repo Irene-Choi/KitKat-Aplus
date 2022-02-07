@@ -6,10 +6,10 @@ let myMaze = {};
 
 const callMaze = (maze, level = 'easy', withanimation = false, algorithm, borderstyle) => {
   const difficulty = { 
-          'easy' : { mazeSize: 500, cells: 10 },
-          'medium' : { mazeSize: 500, cells: 20 },
-          'hard' : { mazeSize: 600, cells: 30 },
-          'extreme' : { mazeSize: 800, cells: 50 },
+          'easy' : { mazeSize: 400, cells: 8 },
+          'medium' : { mazeSize: 500, cells: 14 },
+          'hard' : { mazeSize: 600, cells: 20 },
+          'extreme' : { mazeSize: 900, cells: 40 },
         };
   if (algorithm === 'backtracker') 
     myMaze = new Maze_Backtracker(maze, difficulty[level].mazeSize, difficulty[level].cells);
@@ -18,6 +18,7 @@ const callMaze = (maze, level = 'easy', withanimation = false, algorithm, border
 
   myMaze.init();
   myMaze.setBorderStyle(borderstyle);
+  // myMaze.setBGImage('./image/blue_block.jpg');
   myMaze.algorithm(withanimation);
 }
 

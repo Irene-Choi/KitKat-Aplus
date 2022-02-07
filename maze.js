@@ -69,6 +69,12 @@ class Maze {
     else this.border = this.cellSize / 2;
   }
 
+  // setBGImage = (url) => {
+  //   let img = new Image();
+  //   img.src = url;
+  //   img.onload = () => this.ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  // }
+
   getPoint = (p) => {
     return p * this.cellSize + this.border / 2;
   }
