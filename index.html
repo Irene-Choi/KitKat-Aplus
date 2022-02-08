@@ -5,25 +5,70 @@
   </head>
 
   <body>
-    <form>
-      <input type="radio" id="easy" name="level" value="easy">
-      <label for="easy">Easy</label><br>
-      <input type="radio" id="medium" name="level" value="medium">
-      <label for="medium">Medium</label><br>
-      <button type="button" onclick="call();">Click Me!</button>
-    </form>
-    <script>
-      function call(level)
-      {
-        // const difficulty = document.querySelector();
-        const difficulty = 'easy';
-        callMaze(difficulty, false);
-      }
-    </script>
+    <div id="page-top" class='container'>
+      <nav id="function" class='function'>
+        <form>
+          <button class='run' type="button">Generate Maze Start</button>
+          <div class="level">
+            <fieldset>
+              <legend>Choose Level</legend>
+              <input type="radio" id="easy" name="level" value="easy" checked>
+              <label for="easy">Easy</label><br>
+              <input type="radio" id="medium" name="level" value="medium">
+              <label for="medium">Medium</label><br>
+              <input type="radio" id="hard" name="level" value="hard">
+              <label for="easy">Hard</label><br>
+              <input type="radio" id="extreme" name="level" value="extreme">
+              <label for="medium">Extreme</label>
+            </fieldset>
+          </div>
 
-    <canvas class="maze"></canvas>
+          <div class="animation">
+            <fieldset>
+              <legend>Animation</legend>
+              <input type="checkbox" class="animation" name="animation" id="animation" checked>
+              <!-- <label for="animation">Animation</label> -->
+            </fieldset>
+          </div>
+    
+          <div class="algorithm">
+            <fieldset>
+              <legend>Algorithm</legend>
+              <input type="radio" id="backtracker" name="algorithm" value="backtracker" checked>
+              <label for="easy">Backtracker</label><br>
+              <input type="radio" id="kruskal" name="algorithm" value="kruskal">
+              <label for="medium">Kruskal</label><br>
+            </fieldset>
+          </div>
 
-  <script src="maze.js"></script>
-  <!-- <script src="mazegame.js"></script> -->
+          <div class="borderstyle">
+            <fieldset>
+              <legend>Border Style</legend>
+              <input type="radio" id="borderstyle" name="borderstyle" value="thin" checked>
+              <label for="thin">Thin</label><br>
+              <input type="radio" id="borderstyle" name="borderstyle" value="thick">
+              <label for="thick">Thick</label><br>
+            </fieldset>
+          </div>
+        </form>
+      </nav>
+      <div class="container main-area">
+        <div class="complete" id='complete'>
+          <div  class="message">
+            <!-- <h4>Maze Completed</h4> -->
+            <div id='complete-message_title'>Maze Completed</div>
+            <div id='complete-message'>How many did you moved?</div>
+            <button class="replay" id="submit">Play again</button>
+          </div>
+        </div>
+        <div class="maze">
+          <canvas class="maze" id='maze'></canvas>
+        </div>
+      </div>
+    </div>
+
+
+
+    <script type="module" src='./script.js'></script>
   </body>
 </html>
