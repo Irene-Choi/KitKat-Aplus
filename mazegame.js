@@ -42,7 +42,7 @@ export function move(e) {
     if (thismaze.currentCell === thismaze.goal) {
       complete.style.display = "block";
       gameFinished = true;
-      message.innerHTML = `You Moved ${countMove} Steps.`;
+      message.innerHTML = `You moved ${countMove} steps.`;
     }
   }
 }
