@@ -1,4 +1,4 @@
-import { Maze } from "./maze.js";
+import { Maze, Cell } from "./maze.js";
 
 class Maze_Kruskal extends Maze {
   constructor (canvas, size, cellsinaLine) {
@@ -19,11 +19,11 @@ class Maze_Kruskal extends Maze {
       this.grid.push(row);
     }
     // make random wall array
-    this.walls = shuffle(this.walls);
+    this.walls = this.shuffle(this.walls);
 
     // Set the starting and goal grid
     this.currentCell = this.grid[0][0];
-    this.goal = this.grid[this.rows - 1][this.columns - 1];
+    this.goal = this.grid[this.height - 1][this.width - 1];
   }
 
   algorithm = (withAnimation) => {
@@ -45,7 +45,7 @@ class Maze_Kruskal extends Maze {
         this.algorithm(withAnimation);
     } else {
       this.isComplete = true;
-      this.drawImage(this.currentCell, 'boy');
+      this.drawImage(this.currentCell);
       this.drawImage(this.goal, 'treasure');
     }
   }
@@ -76,14 +76,19 @@ class Maze_Kruskal extends Maze {
     return [cell1, cell2];
   }
 
+  shuffle = (array) => {
+    array.sort(() => Math.random() - 0.5);
+    return array;
+  }
 }
 
-class Cell_Kruskal {
+class Cell_Kruskal extends Cell {
   constructor (x,y) {
-    this.x = x;
-    this.y = y;
+    super(x,y);
+    // this.x = x;
+    // this.y = y;
+    // this.walls = { top: true, right: true, bottom: true, left: true };
     this.set = [`${x}.${y}`];
-    this.walls = { top: true, right: true, bottom: true, left: true };
   }
 
   isConnected = (cell) => {
@@ -93,11 +98,6 @@ class Cell_Kruskal {
       return true;
     } else return false;
   }
-}
-
-function shuffle(array) {
-  array.sort(() => Math.random() - 0.5);
-  return array;
 }
 
 export { Maze_Kruskal };

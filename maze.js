@@ -11,8 +11,8 @@ class Maze {
 
     this.height = cellsinaLine;
     this.width = cellsinaLine;
-    this.columns = cellsinaLine;
-    this.rows = cellsinaLine;
+    // this.columns = cellsinaLine;
+    // this.rows = cellsinaLine;
 
     this.size = size;
     this.cellSize = canvas.width / this.width;
@@ -50,9 +50,10 @@ class Maze {
     this.ctx.fillRect(this.getPoint(cell.x), this.getPoint(cell.y), size, size);
   }
 
-  drawImage = (cell, name = 'boy') => {
+  drawImage = (cell, name = 'boy-right') => {
     let img = new Image();
-    if (name === 'boy') img.src = './image/sprite.png';
+    if (name === 'boy-right') img.src = './image/sprite-right.png';
+    else if (name === 'boy-left') img.src = './image/sprite-left.png';
     else if (name === 'treasure') img.src = './image/finishSprite.png';
     // let margin = Math.floor(this.cellSize / 10);
     let margin = 1;
@@ -67,12 +68,6 @@ class Maze {
     else this.border = this.cellSize / 2;
   }
 
-  // setBGImage = (url) => {
-  //   let img = new Image();
-  //   img.src = url;
-  //   img.onload = () => this.ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-  // }
-
   getPoint = (p) => {
     return p * this.cellSize + this.border / 2;
   }
@@ -82,5 +77,14 @@ class Maze {
     return OPPOSITE[dir];
   };
 };
+
+class Cell {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.visited = false;
+    this.walls = { top: true, right: true, bottom: true, left: true };
+  }
+};
  
-export { Maze }
+export { Maze, Cell }

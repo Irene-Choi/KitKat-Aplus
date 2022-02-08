@@ -1,4 +1,4 @@
-import { Maze } from "./maze.js";
+import { Maze, Cell } from "./maze.js";
 
 class Maze_Backtracker extends Maze {
   constructor(canvas, size, cellsinaLine) {
@@ -8,9 +8,9 @@ class Maze_Backtracker extends Maze {
 
   // Set the grid: Create new this.grid array based on number of instance rows and columns
   init = () => {
-    for (let y = 0; y < this.rows; y++) {
+    for (let y = 0; y < this.height; y++) {
       let row = [];
-      for (let x = 0; x < this.columns; x++) {
+      for (let x = 0; x < this.width; x++) {
         let cell = new Cell(x, y);
         row.push(cell);
       }
@@ -18,7 +18,7 @@ class Maze_Backtracker extends Maze {
     }
     // Set the starting and goal grid
     this.currentCell = this.grid[0][0];
-    this.goal = this.grid[this.rows - 1][this.columns - 1];
+    this.goal = this.grid[this.height - 1][this.width - 1];
     // console.log(this.grid);
   }
 
@@ -45,7 +45,7 @@ class Maze_Backtracker extends Maze {
     // If no more items in the stack then all cells have been visted and the function can be exited
     if (this.stack.length === 0) {
       this.isComplete = true;
-      this.drawImage(this.currentCell, 'boy');
+      this.drawImage(this.currentCell);
       this.drawImage(this.goal, 'treasure');
       return false;
     }
@@ -90,13 +90,6 @@ class Maze_Backtracker extends Maze {
   }
 };
 
-class Cell {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-    this.visited = false;
-    this.walls = { top: true, right: true, bottom: true, left: true };
-  }
-};
+
 
 export { Maze_Backtracker };

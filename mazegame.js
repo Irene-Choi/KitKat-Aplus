@@ -35,7 +35,9 @@ export function move(e) {
     let nextCell = thismaze.grid[y + DY[dir[key]]][x + DX[dir[key]]];
     thismaze.drawCell(thismaze.currentCell, '#ffc600');
     thismaze.currentCell = nextCell;
-    thismaze.drawImage(thismaze.currentCell, 'boy');
+    let image = 'boy-right';
+    if (dir[key] === 'left') image = 'boy-left';
+    thismaze.drawImage(thismaze.currentCell, image);
     countMove++;
     if (thismaze.currentCell === thismaze.goal) {
       complete.style.display = "block";
